@@ -4,7 +4,8 @@
 
 var app = {
   title: 'Indecision?',
-  subtitle: 'What exactly is on your mind?'
+  subtitle: 'What exactly is on your mind?',
+  options: ['one']
 };
 
 var template = React.createElement(
@@ -15,10 +16,15 @@ var template = React.createElement(
     null,
     app.title.toLowerCase()
   ),
-  React.createElement(
+  app.subtitle && React.createElement(
     'p',
     null,
     app.subtitle
+  ),
+  React.createElement(
+    'p',
+    null,
+    app.options.length ? 'Here are your options' : 'No Options'
   ),
   React.createElement(
     'ol',
@@ -42,26 +48,30 @@ var user = {
   location: 'Lagos'
 };
 
+function getLocation(location) {
+  if (location) return React.createElement(
+    'p',
+    null,
+    'Location: ',
+    location
+  );
+}
+
 var secondTemplate = React.createElement(
   'div',
   null,
   React.createElement(
     'h1',
     null,
-    user.name
+    user.name ? user.name : 'Anon'
   ),
-  React.createElement(
+  user.age && user.age >= 18 && React.createElement(
     'p',
     null,
     'Age: ',
     user.age
   ),
-  React.createElement(
-    'p',
-    null,
-    'Location: ',
-    user.location
-  )
+  getLocation(user.location)
 );
 
 var appRoot = document.getElementById('app');

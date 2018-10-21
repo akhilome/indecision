@@ -3,12 +3,14 @@
 const app = {
   title: 'Indecision?',
   subtitle: 'What exactly is on your mind?',
+  options: ['one'],
 };
 
 const template = (
   <div>
     <h1>{app.title.toLowerCase()}</h1>
-    <p>{app.subtitle}</p>
+    {app.subtitle && <p>{app.subtitle}</p>}
+    <p>{app.options.length ? 'Here are your options' : 'No Options' }</p>
     <ol>
       <li>Item one</li>
       <li>Item 2wo</li>
@@ -22,11 +24,15 @@ const user = {
   location: 'Lagos',
 };
 
+function getLocation(location) {
+  if (location) return <p>Location: {location}</p>;
+}
+
 const secondTemplate = (
   <div>
-    <h1>{user.name}</h1>
-    <p>Age: {user.age}</p>
-    <p>Location: {user.location}</p>
+    <h1>{user.name ? user.name : 'Anon'}</h1>
+    {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
+    {getLocation(user.location)}
   </div>
 );
 
