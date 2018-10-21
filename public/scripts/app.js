@@ -1,18 +1,24 @@
 'use strict';
 
 // JSX 
+
+var app = {
+  title: 'Indecision?',
+  subtitle: 'What exactly is on your mind?'
+};
+
 var template = React.createElement(
   'div',
   null,
   React.createElement(
     'h1',
     null,
-    'This is a heading'
+    app.title.toLowerCase()
   ),
   React.createElement(
     'p',
     null,
-    'This is jsx from src/app.js'
+    app.subtitle
   ),
   React.createElement(
     'ol',
@@ -30,26 +36,34 @@ var template = React.createElement(
   )
 );
 
+var user = {
+  name: 'Kizito Akhilome',
+  age: '22',
+  location: 'Lagos'
+};
+
 var secondTemplate = React.createElement(
   'div',
   null,
   React.createElement(
     'h1',
     null,
-    'Kizito Akhilome'
+    user.name
   ),
   React.createElement(
     'p',
     null,
-    'Age: 22'
+    'Age: ',
+    user.age
   ),
   React.createElement(
     'p',
     null,
-    'Location: Lagos'
+    'Location: ',
+    user.location
   )
 );
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(secondTemplate, appRoot);
+ReactDOM.render(template, appRoot);

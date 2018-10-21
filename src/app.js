@@ -1,8 +1,14 @@
 // JSX 
+
+const app = {
+  title: 'Indecision?',
+  subtitle: 'What exactly is on your mind?',
+};
+
 const template = (
   <div>
-    <h1>This is a heading</h1>
-    <p>This is jsx from src/app.js</p>
+    <h1>{app.title.toLowerCase()}</h1>
+    <p>{app.subtitle}</p>
     <ol>
       <li>Item one</li>
       <li>Item 2wo</li>
@@ -10,14 +16,20 @@ const template = (
   </div>
 );
 
+const user = {
+  name: 'Kizito Akhilome',
+  age: '22',
+  location: 'Lagos',
+};
+
 const secondTemplate = (
   <div>
-    <h1>Kizito Akhilome</h1>
-    <p>Age: 22</p>
-    <p>Location: Lagos</p>
+    <h1>{user.name}</h1>
+    <p>Age: {user.age}</p>
+    <p>Location: {user.location}</p>
   </div>
 );
 
 const appRoot = document.getElementById('app');
 
-ReactDOM.render(secondTemplate, appRoot);
+ReactDOM.render(template, appRoot);
