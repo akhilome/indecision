@@ -44,43 +44,50 @@ var template = React.createElement(
 
 var count = 0;
 function addOne() {
-  console.log('addone');
+  count++;
+  renderCounterApp();
 }
 
 function minusOne() {
-  console.log('minusOne');
+  count--;
+  renderCounterApp();
 }
 
 function reset() {
-  console.log('reset');
+  count = 0;
+  renderCounterApp();
 }
-
-var secondTemplate = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    'Count: ',
-    count
-  ),
-  React.createElement(
-    'button',
-    { onClick: addOne },
-    '+1'
-  ),
-  React.createElement(
-    'button',
-    { onClick: minusOne },
-    '-1'
-  ),
-  React.createElement(
-    'button',
-    { onClick: reset },
-    'reset'
-  )
-);
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(secondTemplate, appRoot);
+var renderCounterApp = function renderCounterApp() {
+  var secondTemplate = React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      'Count: ',
+      count
+    ),
+    React.createElement(
+      'button',
+      { onClick: addOne },
+      '+1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: minusOne },
+      '-1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: reset },
+      'reset'
+    )
+  );
+
+  ReactDOM.render(secondTemplate, appRoot);
+};
+
+renderCounterApp();
