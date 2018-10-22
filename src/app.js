@@ -10,8 +10,11 @@ const renderer = () => {
     <div>
       <h1>{app.title.toLowerCase()}</h1>
       {app.subtitle && <p>{app.subtitle}</p>}
+
       <p>{app.options.length ? 'Here are your options' : 'No Options' }</p>
       <ol>{ app.options.map((option, i) => <li key={i}>{option}</li>) }</ol>
+
+      <button disabled={app.options.length === 0} onClick={makeDecision}>What should I do?</button>
       <button onClick={emptyOptions}>remove all</button>
       
       <form onSubmit={onFormSubmit}>
@@ -36,6 +39,11 @@ const onFormSubmit = (e) => {
 const emptyOptions = () => {
   app.options = [];
   renderer();
+}
+
+const makeDecision = () => {
+  const randDecisionIndex = Math.floor(Math.random() * app.options.length);
+  alert(app.options[randDecisionIndex]);
 }
 
 const appRoot = document.getElementById('app');

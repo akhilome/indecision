@@ -39,6 +39,11 @@ var renderer = function renderer() {
     ),
     React.createElement(
       'button',
+      { disabled: app.options.length === 0, onClick: makeDecision },
+      'What should I do?'
+    ),
+    React.createElement(
+      'button',
       { onClick: emptyOptions },
       'remove all'
     ),
@@ -69,6 +74,11 @@ var onFormSubmit = function onFormSubmit(e) {
 var emptyOptions = function emptyOptions() {
   app.options = [];
   renderer();
+};
+
+var makeDecision = function makeDecision() {
+  var randDecisionIndex = Math.floor(Math.random() * app.options.length);
+  alert(app.options[randDecisionIndex]);
 };
 
 var appRoot = document.getElementById('app');
