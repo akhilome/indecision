@@ -1,7 +1,6 @@
 'use strict';
 
 // JSX 
-
 var app = {
   title: 'Indecision?',
   subtitle: 'What exactly is on your mind?',
@@ -28,28 +27,20 @@ var renderer = function renderer() {
       app.options.length ? 'Here are your options' : 'No Options'
     ),
     React.createElement(
-      'p',
+      'ol',
       null,
-      app.options.length
+      app.options.map(function (option, i) {
+        return React.createElement(
+          'li',
+          { key: i },
+          option
+        );
+      })
     ),
     React.createElement(
       'button',
       { onClick: emptyOptions },
       'remove all'
-    ),
-    React.createElement(
-      'ol',
-      null,
-      React.createElement(
-        'li',
-        null,
-        'Item one'
-      ),
-      React.createElement(
-        'li',
-        null,
-        'Item 2wo'
-      )
     ),
     React.createElement(
       'form',
