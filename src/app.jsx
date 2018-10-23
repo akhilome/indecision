@@ -1,50 +1,51 @@
-// JSX 
-const app = {
-  title: 'Indecision?',
-  subtitle: 'What exactly is on your mind?',
-  options: [],
-};
-
-const renderer = () => {
-  const template = (
-    <div>
-      <h1>{app.title.toLowerCase()}</h1>
-      {app.subtitle && <p>{app.subtitle}</p>}
-
-      <p>{app.options.length ? 'Here are your options' : 'No Options' }</p>
-      <ol>{ app.options.map((option, i) => <li key={i}>{option}</li>) }</ol>
-
-      <button disabled={app.options.length === 0} onClick={makeDecision}>What should I do?</button>
-      <button onClick={emptyOptions}>remove all</button>
-      
-      <form onSubmit={onFormSubmit}>
-        <input type="text" name="option" />
-        <button>Add option</button>
-      </form>
-    </div>
-  );
-
-  ReactDOM.render(template, appRoot);
+class Header extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Indecision App</h1>
+        <h2>Put your life in the hands of a computer</h2>
+      </div>
+    );
+  }
 }
 
-const onFormSubmit = (e) => {
-  e.preventDefault();
-  if (!e.target.option.value) return;
-
-  app.options.push(e.target.option.value);
-  e.target.option.value = '';
-  renderer();
+class Action extends React.Component {
+  render() {
+    return (
+      <div>
+        <button>What should I do?</button>
+      </div>
+    );
+  }
 }
 
-const emptyOptions = () => {
-  app.options = [];
-  renderer();
+class Options extends React.Component {
+  render() {
+    return (
+      <div>
+        <p>Options component here</p>
+      </div>
+    );
+  }
 }
 
-const makeDecision = () => {
-  const randDecisionIndex = Math.floor(Math.random() * app.options.length);
-  alert(app.options[randDecisionIndex]);
+class AddOption extends React.Component {
+  render() {
+    return (
+      <div>
+        <p>Add option component here</p>
+      </div>
+    );
+  }
 }
 
-const appRoot = document.getElementById('app');
-renderer();
+const jsx = (
+  <div>
+    <Header />
+    <Action />
+    <Options />
+    <AddOption />
+  </div>
+);
+
+ReactDOM.render(jsx, document.getElementById('app'));
