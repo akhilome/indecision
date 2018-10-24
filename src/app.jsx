@@ -3,8 +3,9 @@ class IndecisionApp extends React.Component {
     super(props);
     this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
     this.handlePick = this.handlePick.bind(this);
+    this.handleAddOption = this.handleAddOption.bind(this);
     this.state = {
-      options: ['One', 'Three', 'Five', 'Seven', 'Nine']
+      options: []
     }
   }
 
@@ -21,6 +22,20 @@ class IndecisionApp extends React.Component {
     alert(this.state.options[randNum]);
   }
 
+  handleAddOption(option) {
+    if (!option) {
+      return 'Enter valid value to add item';
+    } else if(this.state.options.includes(option)) {
+      return 'That option already exists!';
+    }
+
+    this.setState((prevState) => {
+      return {
+        options: prevState.options.concat(option)
+      };
+    });
+  }
+
   render() {
     const title = 'Indecision App';
     const subtitle = 'Put your life in the hands of a computer';
@@ -35,7 +50,7 @@ class IndecisionApp extends React.Component {
           options={this.state.options}
           handleDeleteOptions={this.handleDeleteOptions}
         />
-        <AddOption />
+        <AddOption handleAddOption={this.handleAddOption} />
       </div>
     );
   }
@@ -87,20 +102,33 @@ class Option extends React.Component {
 }
 
 class AddOption extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleAddOption = this.handleAddOption.bind(this);
+    this.state = {
+      error: undefined
+    };
+  }
+
   handleAddOption(e) {
     e.preventDefault();
+    const option = e.target.option.value.trim();
+    const error = this.props.handleAddOption(option);
 
-    if (e.target.option.value.trim()) {
-      alert(e.target.option.value);
-    }
+    this.setState(() => {
+      return { error };
+    });
   }
 
   render() {
     return (
-      <form onSubmit={this.handleAddOption}>
-        <input name="option" type="text"/>
-        <input type="submit" value="Add Option"/>
-      </form>
+      <div>
+        {this.state.error && <p>{this.state.error}</p>}
+        <form onSubmit={this.handleAddOption}>
+          <input name="option" type="text"/>
+          <input type="submit" value="Add Option"/>
+        </form>
+      </div>
     );
   }
 }
