@@ -1,20 +1,29 @@
-let isClicked = false;
+class VisibilityToggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.toggleClick = this.toggleClick.bind(this);
+    this.state = {
+      isClicked: false
+    };
+  }
 
-const toggleClick = () => {
-  isClicked = !isClicked;
-  render();
+  toggleClick() {
+    this.setState((prevState) => {
+      return {
+        isClicked: !prevState.isClicked
+      };
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Visibility</h1>
+        <button onClick={this.toggleClick}>{this.state.isClicked ? 'hide details' : 'show details'}</button>
+        {this.state.isClicked && <p>Haha! Found me!</p>}
+      </div>
+    );
+  }
 }
 
-const render = () => {
-  const template = (
-    <div>
-      <h1>Visibility</h1>
-      <button onClick={toggleClick}>{isClicked ? 'hide details' : 'show details'}</button>
-      {isClicked && <p>Haha! You found me!</p>}
-    </div>
-  );
-  ReactDOM.render(template, appRoot);
-}
-
-const appRoot = document.getElementById('app');
-render();
+ReactDOM.render(<VisibilityToggle />, document.getElementById('app'));
