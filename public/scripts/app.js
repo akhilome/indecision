@@ -19,22 +19,41 @@ var Counter = function (_React$Component) {
     _this.handleAddOne = _this.handleAddOne.bind(_this);
     _this.handleMinusOne = _this.handleMinusOne.bind(_this);
     _this.handleReset = _this.handleReset.bind(_this);
-    _this.state = { count: props.count };
+    _this.state = { count: 0 };
     return _this;
   }
 
   _createClass(Counter, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      try {
+        var count = Number(localStorage.getItem('count'));
+        if (!Number.isNaN(count)) this.setState(function () {
+          return { count: count };
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevState.count !== this.state.count) {
+        localStorage.setItem('count', this.state.count);
+      }
+    }
+  }, {
     key: 'handleAddOne',
     value: function handleAddOne() {
       this.setState(function (prevState) {
-        return { count: ++prevState.count };
+        return { count: prevState.count + 1 };
       });
     }
   }, {
     key: 'handleMinusOne',
     value: function handleMinusOne() {
       this.setState(function (prevState) {
-        return { count: --prevState.count };
+        return { count: prevState.count - 1 };
       });
     }
   }, {
@@ -77,7 +96,5 @@ var Counter = function (_React$Component) {
 
   return Counter;
 }(React.Component);
-
-Counter.defaultProps = { count: 0 };
 
 ReactDOM.render(React.createElement(Counter, null), document.getElementById('app'));
