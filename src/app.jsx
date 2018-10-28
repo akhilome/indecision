@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import IndecisionApp from './components/IndecisionApp';
 
-const temp = <p>testing it!</p>;
-
-ReactDOM.render(temp, document.getElementById('app'));
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
