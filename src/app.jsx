@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-const temp = React.createElement('p', {}, 'testing it');
+const temp = <p>testing it!</p>;
 
 ReactDOM.render(temp, document.getElementById('app'));
