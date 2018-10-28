@@ -12,5 +12,8 @@ module.exports = {
       test: /\.(js|jsx)$/,
       exclude: /node_modules/
     }]
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   }
 };
